@@ -18,13 +18,14 @@ eth=${eth:=$defint}
 read -p 'Docker Network Name: (default vip-'$last'): ' name
 name=${name:="vip-"$last}
 echo -e "Build the network on each node, \033[0;33mmake sure the physical parent interface (parent=) is set properly on each node if different)\033[0m:"
-echo -e "        \033[44mdocker network create --config-only --subnet $sub --gateway $gate --ip-range $ip/32 -o parent=$eth $name\033[0m"
+echo -e "\033[44mdocker network create --config-only --subnet $sub --gateway $gate --ip-range $ip/32 -o parent=$eth $name\033[0m"
 docker network create --config-only --subnet $sub --gateway $gate --ip-range $ip/32 -o parent=$eth $name
 echo
 echo "Then create the swarm network from any manager node:"
-echo -e "        \033[44mdocker network create -d macvlan --scope swarm --config-from $name swarm-asterisk\033[0m"
+echo -e "\033[44mdocker network create -d macvlan --scope swarm --config-from $name swarm-asterisk\033[0m"
 docker network create -d macvlan --scope swarm --config-from $name swarm-asterisk
 echo 
 echo "Deploy services"
+echo -e "\033[44mdocker stack deploy -c callcenter.yml callcenter\033[0m"
 echo
 docker stack deploy -c callcenter.yml callcenter
