@@ -17,10 +17,10 @@ RUN apk add --update --allow-untrusted  bash lame unixodbc \
     
 COPY --chown=asterisk:asterisk ./configs/ /etc/asterisk
 
-COPY --chown=asterisk:asterisk ./wav/* /var/lib/asterisk/sounds/
-
 COPY --chown=root:root ./odbc/ /etc/
+
+COPY --chown=asterisk:asterisk entrypoint.sh /
 
 USER asterisk
 
-CMD ["/bin/sh", "-c", "/usr/sbin/asterisk"]
+ENTRYPOINT ["/entrypoint.sh"]
