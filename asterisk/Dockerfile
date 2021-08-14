@@ -2,7 +2,7 @@ FROM alexshander/asterisk:18.3-alpine
 
 LABEL maintainer="Alexandr Shander <alexmasc05@gmail.com"
 
-RUN rm -f /etc/asterisk
+RUN rm -f /etc/asterisk/*
     
 COPY --chown=asterisk:asterisk ./configs/ /etc/asterisk
 
