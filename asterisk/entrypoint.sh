@@ -1,6 +1,6 @@
 #!/bin/bash
 
-default_password_count=$(grep -c 'password=password' configs/pjsip_endpoints_t.conf)
+default_password_count=$(grep -c 'password=password' configs/pjsip_endpoints.conf)
 counter=0
 while [ $counter -lt $default_password_count ]
 do
