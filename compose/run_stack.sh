@@ -28,5 +28,5 @@ echo
 echo "Deploy services"
 echo -e "\033[44mdocker stack deploy -c callcenter.yml callcenter\033[0m"
 echo
-docker compose -p callcenter up -d
+docker-compose -p callcenter up -d
 
