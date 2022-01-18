@@ -2,7 +2,7 @@
 
 Сборка основанна на следующих компонентах:
 
-- Docker swarm
+- Docker compose
 
 - Git
 
@@ -10,13 +10,8 @@
 
 # Как установить
 
-Для работы системы требуется активировать docker swarm
 
-```bash
-  docker swarm init
-```
-
-Далее скачать проект с Github и запустить настройку и установку:
+Скачать проект с Github и запустить настройку и установку:
 
 ```bash
   cd /usr/local/share/application
@@ -48,17 +43,8 @@ Docker Network Name: (default vip-50):
 # Настройка конфигурации в Asterisk
 
 Что настроить конфигурацию в Asterisk нужно зайти в запущенный docker с Asterisk.
-Опеределим какой контенейр наш
 
 ```bash
-  docker container ls | grep asterisk
-19c6b23fba1f   alexshander/asterisk:18.3-parking    "/entrypoint.sh"         4 hours ago    Up 4 hours                                                                 callcenter_asterisk.1.vss5b1t0ohn9wu2orr4bz8t3v
-
-```
-
-Выберим первый столбец, это буде HASH  имя нашего контейнера, используюя это имя, войдём во внуторь контейнера
-
-```bash
-  docker container exec -it -u 0 19c6b23fba1f bash
+  docker exec -ti callcenter-asterisk-1 bash
 ```
 Мы оказываемся внутри контейнера, где можем менять конфигурацию в по стандартному пути **/etc/asterisk** .  И так же пользоваться консолью **asterisk -rvvv** для применения.

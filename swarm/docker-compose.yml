@@ -1,27 +1,13 @@
-version: "3.9"
+version: "2.4"
 services:
 
   asterisk:
     image: alexshander/asterisk:18.3-parking
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 300M
-        reservations:
-          cpus: '0.5'
-          memory: 256M
-      replicas: 1
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: stop-first
-      restart_policy:
-        condition: any
-        delay: 30s
-        max_attempts: 3
-        window: 120s
-    hostname: sip.$HOSTNAME
+    hostname: sip
+    cpus: 1
+    mem_limit: 300m
+    mem_reservation: 256M
+    scale: 1
     logging:
       driver: "json-file"
       options:
@@ -39,17 +25,7 @@ services:
 
   asterisk-db:
     image: postgres:13.3-alpine
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 1
-        delay: 10s
-        order: stop-first
-      restart_policy:
-        condition: any
-        delay: 30s
-        max_attempts: 3
-        window: 120s
+    scale: 1
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=asterisk
@@ -57,7 +33,7 @@ services:
       - 5432:5432
     volumes:
       - asterisk-db-data:/var/lib/postgresql/data
-      - $PWD/../sql/asteriskcdrdb.sql:/docker-entrypoint-initdb.d/asteriskcdrdb.sql
+      - "../sql/asteriskcdrdb.sql:/docker-entrypoint-initdb.d/asteriskcdrdb.sql"
     networks:
       - db-backend
 
@@ -67,8 +43,6 @@ networks:
     external: true
     driver: macvlan
   db-backend:
-    external: false
-    driver: overlay
 
 volumes:
   asterisk-configure:
