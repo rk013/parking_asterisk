@@ -15,7 +15,7 @@
 
 ```bash
   git clone https://github.com/rk013/parking_asterisk
-  cd parking_asterisk/swarm
+  cd parking_asterisk/compose
   ./run_stack.sh
 ```
 

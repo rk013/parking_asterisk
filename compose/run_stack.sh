@@ -23,7 +23,7 @@ docker network create --config-only --subnet $sub --gateway $gate --ip-range $ip
 echo
 echo "Then create the swarm network from any manager node:"
 echo -e "\033[44mdocker network create -d macvlan --scope swarm --config-from $name swarm-asterisk\033[0m"
-docker network create -d macvlan --scope swarm --config-from $name swarm-asterisk
+docker network create -d macvlan --config-from $name swarm-asterisk
 echo 
 echo "Deploy services"
 echo -e "\033[44mdocker stack deploy -c callcenter.yml callcenter\033[0m"
