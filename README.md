@@ -14,8 +14,7 @@
 Скачать проект с Github и запустить настройку и установку:
 
 ```bash
-  cd /usr/local/share/application
-  git clone https://github.com/AlexShander/parking_asterisk
+  git clone https://github.com/rk013/parking_asterisk
   cd parking_asterisk/swarm
   ./run_stack.sh
 ```
